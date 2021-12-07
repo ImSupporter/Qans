@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="126dp"
+    android:background="@color/cardBackground">
+
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="27dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="15dp"
+        android:text="유머"
+        android:textSize="9sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/defaultPurple"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="13dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        android:text="헬스장 빌런 특"
+        android:includeFontPadding="false"
+        android:textColor="@color/dark"/>
+
+    <TextView
+        android:id="@+id/writer"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="18dp"
+        android:textSize="9sp"
+        android:fontFamily="@font/regular"
+        android:text="Aiden18"
+        android:includeFontPadding="false"
+        android:textColor="@color/dark"
+        android:gravity="top"/>
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="13dp"
+        android:layout_marginStart="341dp"
+        android:layout_marginTop="18dp"
+        android:textSize="9sp"
+        android:fontFamily="@font/regular"
+        android:text="24분전"
+        android:includeFontPadding="false"
+        android:textColor="@color/dark"/>
+    <TextView
+        android:id="@+id/mainText"
+        android:layout_width="197dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="42dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/regular"
+        android:text="내가 진짜 이해가 안 돼서 그러는데 대체 이 사람 왜 이러는거임? 퇴근하고 오면 진짜 개빡친다고."
+        android:includeFontPadding="false"
+        android:textColor="@color/dark"/>
+    <TextView
+        android:layout_width="34dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="105dp"
+        android:textSize="9sp"
+        android:fontFamily="@font/regular"
+        android:text="댓글알림"
+        android:includeFontPadding="false"
+        android:textColor="@color/dark"/>
+
+
+
+</RelativeLayout>
