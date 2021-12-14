@@ -5,8 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qans.databinding.ActivityMainBinding
@@ -17,12 +19,12 @@ class MainActivity : AppCompatActivity() {
 
     var postList = arrayListOf<Post>(
         Post(1,"유머","헬스장 빌런 특","aiden18","Test1",R.drawable.sample_image_barbel),
-        Post(2,"헬스","헬스장 추천 좀","aiden18","Test2",R.drawable.sample_image_gym),
-        Post(3,"음식","득근득근에 좋은 음식","aiden18","Test3",R.drawable.sample_image_chicken),
+        Post(2,"헬스","헬스장 추천 좀","jennie00","Test2",R.drawable.sample_image_gym),
+        Post(3,"음식","득근득근에 좋은 음식","kevin989","Test3",R.drawable.sample_image_chicken),
         Post(4,"눈바디","몸평 해주세요","aiden18","Test4",R.drawable.sample_image_body),
-        Post(5,"유머","헬스장 빌런 특","aiden18","Test1",R.drawable.sample_image_barbel),
-        Post(6,"헬스","헬스장 추천 좀","aiden18","Test2",R.drawable.sample_image_gym),
-        Post(7,"음식","득근득근에 좋은 음식","aiden18","Test3",R.drawable.sample_image_chicken),
+        Post(5,"유머","헬스장 빌런 특","chris2001","Test1",R.drawable.sample_image_barbel),
+        Post(6,"헬스","헬스장 추천 좀","jennie00","Test2",R.drawable.sample_image_gym),
+        Post(7,"음식","득근득근에 좋은 음식","94tjghks","Test3",R.drawable.sample_image_chicken),
         Post(8,"음식","득근득근에 좋은 음식","aiden18","Test3",R.drawable.sample_image_chicken)
     )
 
@@ -31,10 +33,16 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mAdapter = PostAdapter(postList)
+        val mAdapter = PostAdapter(this, postList)
+        val searchButton = binding.searchButton
+
+        //검색 버튼 이벤트
+        searchButton.setOnClickListener {
+
+        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = PostAdapter(postList)
+        binding.recyclerView.adapter = PostAdapter(this, postList)
         binding.recyclerView.addItemDecoration(PostDecoration(this))
 
     }

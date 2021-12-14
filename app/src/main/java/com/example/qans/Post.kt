@@ -1,5 +1,6 @@
 package com.example.qans
 
+import java.io.Serializable
 import java.time.LocalDateTime
 
 class Post (
@@ -11,4 +12,4 @@ class Post (
     val image: Int
     //time은 추후 추가
     // LocalDateTime 사용
-)
+) : Serializable

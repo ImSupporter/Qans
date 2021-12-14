@@ -15,6 +15,7 @@
         android:background="@color/AppBackground">
 
         <Button
+            android:id="@+id/backButtom"
             android:layout_width="50dp"
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
@@ -42,6 +43,7 @@
         android:id="@+id/UserLayout">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_marginStart="20dp"
@@ -59,6 +61,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/user"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:text="아이디"
@@ -81,12 +84,14 @@
             android:orientation="vertical"
             android:background="@color/AppBackground">
             <ImageView
+                android:id="@+id/photo"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
                 android:layout_gravity="center"
-                android:foreground="@drawable/ic_launcher_foreground"
+                android:scaleType="centerCrop"
                 android:background="@drawable/ic_launcher_background"/>
             <TextView
+                android:id="@+id/mainText"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:text="포스트 본문"
