@@ -9,7 +9,14 @@ class Post (
     var title: String,
     val writer: String,
     var mainText: String,
-    val image: Int
-    //time은 추후 추가
-    // LocalDateTime 사용
-) : Serializable
+    val image: Int?
+) : Serializable{
+    var type = TEXT_TYPE
+    init {
+        if(image != null) type = IMAGE_TYPE
+    }
+    companion object{
+        const val TEXT_TYPE = 0
+        const val IMAGE_TYPE = 1
+    }
+}

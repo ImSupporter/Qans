@@ -10,22 +10,36 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.qans.databinding.ItemImageBinding
+import com.example.qans.databinding.ItemNoimageBinding
+import java.lang.RuntimeException
 
-class PostAdapter(private val context: Context, private val postList: ArrayList<Post>) : RecyclerView.Adapter<PostAdapter.CustomViewHolder> (){
-
+class PostAdapter(private val context: Context, private var postList: MutableList<Post>) : RecyclerView.Adapter<RecyclerView.ViewHolder> (){
+    var helper:SqliteHelper? = null
     // 뷰홀더가 처음 생성될 때
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CustomViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image,parent,false)
-        return CustomViewHolder(view)
+    // viewType의 값은 getItemViewType의 리턴값
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            Post.IMAGE_TYPE->{
+                val binding = ItemImageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                ImageViewHolder(binding)
+            }
+            Post.TEXT_TYPE->{
+                val binding = ItemNoimageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                TextViewHolder(binding)
+            }
+            else->throw RuntimeException("ViewHolder Error")
+        }
     }
 
-
     //재활용해주는 곳 값을 넣어주는
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(postList[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = postList[position]
+        when(item.type){
+            Post.TEXT_TYPE->(holder as TextViewHolder).bind(item)
+            Post.IMAGE_TYPE->(holder as ImageViewHolder).bind(item)
+        }
+
     }
 
     // 리스트의 개수를 넣어준다.
@@ -33,28 +47,29 @@ class PostAdapter(private val context: Context, private val postList: ArrayList<
         return postList.size
     }
 
-    inner class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val image = itemView.findViewById<ImageView>(R.id.cardImage)
-        val category = itemView.findViewById<TextView>(R.id.category)
-        val title = itemView.findViewById<TextView>(R.id.title)
-        val writer = itemView.findViewById<TextView>(R.id.writer)
-        val time = itemView.findViewById<TextView>(R.id.time)
-        val mainText = itemView.findViewById<TextView>(R.id.mainText)
+    override fun getItemViewType(position: Int): Int {
+        return postList[position].type
+    }
 
+    public fun setData(posts : MutableList<Post>){
+        postList = posts
+    }
+
+    inner class ImageViewHolder(private val binding : ItemImageBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item :Post){
             // View에 데이터 넣어주기
             val pos = bindingAdapterPosition
-
-            image.setImageResource(item.image)
-            writer.text = item.writer
-            category.text = item.category
-            title.text = item.title
-            time.text = "24분전"
-            mainText.text = item.mainText
-
+            binding.apply {
+                cardImage.setImageResource(item.image?:R.drawable.ic_launcher_background)
+                writer.text = item.writer
+                category.text = item.category
+                title.text = item.title
+                time.text = "24분전"
+                mainText.text = item.mainText
+            }
 
             //
-            itemView.setOnClickListener {
+            binding.root.setOnClickListener{
                 Log.d("ClickPos", "Pos : $pos")
                 Intent(context,PostDeatailActivty::class.java).apply {
                     putExtra("data",item)
@@ -63,4 +78,28 @@ class PostAdapter(private val context: Context, private val postList: ArrayList<
             }
         }
     }
+    inner class TextViewHolder(private val binding: ItemNoimageBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item :Post){
+            // View에 데이터 넣어주기
+            val pos = bindingAdapterPosition
+            binding.apply {
+                writer.text = item.writer
+                category.text = item.category
+                title.text = item.title
+                time.text = "24분전"
+                mainText.text = item.mainText
+            }
+
+            //
+            binding.root.setOnClickListener{
+                Log.d("ClickPos", "Pos : $pos")
+                Intent(context,PostDeatailActivty::class.java).apply {
+                    putExtra("data",item)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
+        }
+    }
+
+
 }
